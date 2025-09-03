@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBCode Generator - LSPD POI Sheet</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        margin: 20px;
+    }
+    .container {
+        max-width: 900px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #083a6b;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .checkbox-group label {
+        font-weight: normal;
+        display: block;
+        margin: 5px 0;
+    }
+    button {
+        background: #083a6b;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #0b4d91;
+    }
+    #output {
+        margin-top: 20px;
+        white-space: pre-wrap;
+        background: #eee;
+        padding: 10px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>LSPD BBCode Generator</h1>
+
+<!-- Personal Info -->
+<label>Name:</label>
+<input type="text" id="name">
+
+<label>Race:</label>
+<input type="text" id="race">
+
+<label>Sex:</label>
+<select id="sex">
+    <option value="M">M</option>
+    <option value="F">F</option>
+</select>
+
+<label>Age:</label>
+<input type="text" id="age">
+
+<label>Affiliation:</label>
+<input type="text" id="affiliation">
+
+<label>Status:</label>
+<select id="status">
+    <option value="[b][color=#00BF00]ALIVE[/color][/b]">Alive</option>
+    <option value="[b][color=#FF0000]DECEASED[/color][/b]">Deceased</option>
+    <option value="[b]UNKNOWN[/b]">Unknown</option>
+</select>
+
+<label>MDC Link:</label>
+<input type="text" id="mdc">
+
+<label>SAN-GANG Link:</label>
+<input type="text" id="san">
+
+<!-- Threat Analysis -->
+<label>Threat Level:</label>
+<select id="threat">
+    <option value="[b][color=#1E90FF]LOW[/color][/b]">LOW</option>
+    <option value="[b][color=#FFA500]MEDIUM[/color][/b]">MEDIUM</option>
+    <option value="[b][color=#FF0000]HIGH[/color][/b]">HIGH</option>
+</select>
+
+<label>Threat Explanation:</label>
+<textarea id="threatDesc" rows="4"></textarea>
+
+<!-- Gang Criteria -->
+<h3>SANG-GANG Classification Criteria</h3>
+<div class="checkbox-group">
+    <label><input type="checkbox" class="criteria" value="A"> A. Court ruled gang member</label>
+    <label><input type="checkbox" class="criteria" value="B"> B. Gang markings (tattoos, scars)</label>
+    <label><input type="checkbox" class="criteria" value="C"> C. Self-proclaimed gang member</label>
+    <label><input type="checkbox" class="criteria" value="D"> D. Arrested with known gang members</label>
+    <label><input type="checkbox" class="criteria" value="E"> E. Identified by confidential informant</label>
+    <label><input type="checkbox" class="criteria" value="F"> F. Associating with gang members</label>
+    <label><input type="checkbox" class="criteria" value="G"> G. Displays gang symbols/signs</label>
+    <label><input type="checkbox" class="criteria" value="H"> H. Frequenting gang areas</label>
+</div>
+
+<!-- Physical Description -->
+<label>Height:</label>
+<input type="text" id="height">
+<label>Weight:</label>
+<input type="text" id="weight">
+<label>Hair / Eyes:</label>
+<input type="text" id="hairEyes">
+<label>Tattoos (details):</label>
+<textarea id="tattoos" rows="3"></textarea>
+
+<!-- Known Contacts -->
+<label>Known Properties (comma separated):</label>
+<input type="text" id="properties">
+<label>Known Phone Numbers (comma separated):</label>
+<input type="text" id="phones">
+<label>Known Associates (comma separated):</label>
+<input type="text" id="associates">
+
+<!-- Related Cases -->
+<label>Related Cases / IRs (comma separated):</label>
+<input type="text" id="cases">
+
+<button onclick="generateBBCode()">Generate BBCode</button>
+
+<h2>Generated BBCode:</h2>
+<div id="output"></div>
+</div>
+
+<script>
+function generateBBCode() {
+    const name = document.getElementById('name').value;
+    const race = document.getElementById('race').value;
+    const sex = document.getElementById('sex').value;
+    const age = document.getElementById('age').value;
+    const affiliation = document.getElementById('affiliation').value;
+    const status = document.getElementById('status').value;
+    const mdc = document.getElementById('mdc').value;
+    const san = document.getElementById('san').value;
+    const threat = document.getElementById('threat').value;
+    const threatDesc = document.getElementById('threatDesc').value;
+
+    const criteriaElements = document.querySelectorAll('.criteria:checked');
+    let criteriaList = '';
+    criteriaElements.forEach(c => {
+        criteriaList += `[cb] ${c.value}. Criterion selected\n`;
+    });
+
+    const height = document.getElementById('height').value;
+    const weight = document.getElementById('weight').value;
+    const hairEyes = document.getElementById('hairEyes').value;
+    const tattoos = document.getElementById('tattoos').value;
+    const properties = document.getElementById('properties').value.split(',').map(p => `[*] ${p.trim()}`).join('\n');
+    const phones = document.getElementById('phones').value.split(',').map(p => `[*] ${p.trim()}`).join('\n');
+    const associates = document.getElementById('associates').value.split(',').map(a => `[*] ${a.trim()}`).join('\n');
+    const cases = document.getElementById('cases').value.split(',').map(c => `[*] ${c.trim()}`).join('\n');
+
+    const bbcode = `[divbox2=white]
+
+[aligntable=right,0,0,15,0,0,transparent]
+LOS SANTOS POLICE DEPT.
+DETECTIVE BUREAU
+MISSION ROW POLICE STATION
+SINNER STREET 1
+LOS SANTOS
+[/aligntable]
+[aligntable=left,0,15,0,0,0,transparent]
+[bwlspdlogo=130][/bwlspdlogo]
+[/aligntable]
+
+[color=transparent]tt[/color]
+[hr][/hr]
+
+[divbox=#083a6b][b][color=#FFFFFF]PERSONAL INFORMATION[/color][/b][/divbox]
+[divbox=white]
+[aligntable=left,0,0,10,0,0,0]
+[img width=150 height=150]https://i.imgur.com/RvO2yL5.png?1[/img]
+[/aligntable]
+[aligntable=left,0,10,0,0,0,0]
+[b]NAME:[/b] ${name}
+[b]RACE:[/b] ${race}
+[b]SEX:[/b] ${sex}
+[b]AGE:[/b] ${age}
+[b]Affiliation:[/b] ${affiliation}
+[b]Status:[/b] ${status}
+
+[url=${mdc}]MDC Record[/url] | [url=${san}]SAN-GANG File[/url]
+[/aligntable]
+[/divbox]
+
+[hr][/hr]
+
+[divbox=#083a6b][b][color=#FFFFFF]THREAT ANALYSIS[/color][/b][/divbox]
+[divbox=white]
+[b]Threat Level:[/b] ${threat}
+
+${threatDesc}
+[/divbox]
+
+[hr][/hr]
+
+[divbox=#083a6b][b][color=#FFFFFF]SANG-GANG CLASSIFICATION CRITERIA[/color][/b][/divbox]
+[altspoiler=Criteria Identified]
+[divbox=white]
+${criteriaList}
+[/divbox]
+[/altspoiler]
+
+[hr][/hr]
+
+[divbox=#083a6b][b][color=#FFFFFF]PHYSICAL DESCRIPTION[/color][/b][/divbox]
+[divbox=white]
+[b]Height:[/b] ${height}
+[b]Weight:[/b] ${weight}
+[b]Hair / Eyes:[/b] ${hairEyes}
+[b]Tattoos:[/b] ${tattoos}
+[/divbox]
+
+[hr][/hr]
+
+[divbox=#083a6b][b][color=#FFFFFF]KNOWN CONTACTS & ASSETS[/color][/b][/divbox]
+[divbox=white]
+[b]Known Properties:[/b]
+[list]
+${properties}
+[/list]
+
+[b]Known Phone Numbers:[/b]
+[list]
+${phones}
+[/list]
+
+[b]Known Associates:[/b]
+[list]
+${associates}
+[/list]
+[/divbox]
+
+[hr][/hr]
+
+[divbox=#083a6b][b][color=#FFFFFF]RELATED CASES / INCIDENT REPORTS[/color][/b][/divbox]
+[divbox=white]
+[list]
+${cases}
+[/list]
+[/divbox]
+
+[hr][/hr]
+[center][divbox=#083a6b][color=#FFFFFF][size=85]CONFIDENTIAL - FOR DETECTIVE BUREAU USE ONLY[/size][/color][/divbox][/center]
+
+[/divbox2]`;
+
+    document.getElementById('output').textContent = bbcode;
+}
+</script>
+</body>
+</html>
