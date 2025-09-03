@@ -3,279 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BBCode Generator - LSPD POI Sheet</title>
+<title>GTAW BBCode Generator</title>
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: #f5f5f5;
         margin: 20px;
+        background: #f4f4f4;
     }
-    .container {
-        max-width: 900px;
-        margin: auto;
+    h2 {
+        color: #333;
+    }
+    .section {
         background: #fff;
-        padding: 20px;
+        padding: 15px;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-        text-align: center;
-        margin-bottom: 15px;
-        color: #083a6b;
+        margin-bottom: 20px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
     label {
         display: block;
-        margin-top: 10px;
-        font-weight: bold;
+        margin-top: 8px;
     }
-    input, textarea, select {
+    input[type="text"], textarea {
         width: 100%;
-        padding: 8px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
+        padding: 6px;
+        margin-top: 4px;
+        margin-bottom: 10px;
         border-radius: 4px;
+        border: 1px solid #ccc;
     }
-    .checkbox-group label {
-        font-weight: normal;
-        display: block;
-        margin: 5px 0;
+    .checkbox-group {
+        margin-bottom: 15px;
     }
     button {
-        background: #083a6b;
-        color: white;
         padding: 10px 15px;
+        margin-right: 10px;
+        background: #007bff;
+        color: #fff;
         border: none;
         border-radius: 4px;
-        margin-top: 20px;
         cursor: pointer;
-        font-size: 16px;
     }
     button:hover {
-        background: #0b4d91;
+        background: #0056b3;
     }
     #output {
-        margin-top: 20px;
-        white-space: pre-wrap;
-        background: #eee;
-        padding: 10px;
-        border-radius: 4px;
-        font-family: monospace;
+        width: 100%;
+        height: 350px;
+        margin-top: 15px;
     }
 </style>
 </head>
 <body>
-<div class="container">
-<h1>LSPD BBCode Generator</h1>
 
-<!-- Personal Info -->
-<label>Name:</label>
-<input type="text" id="name">
+<h2>GTAW BBCode Generator</h2>
 
-<label>Race:</label>
-<input type="text" id="race">
+<div class="section">
+    <label>Case File Number:</label>
+    <input type="text" id="caseNumber" placeholder="Enter case number">
 
-<label>Sex:</label>
-<select id="sex">
-    <option value="M">M</option>
-    <option value="F">F</option>
-</select>
+    <label>POI Name:</label>
+    <input type="text" id="poiName" placeholder="Enter name of POI">
 
-<label>Age:</label>
-<input type="text" id="age">
-
-<label>Affiliation:</label>
-<input type="text" id="affiliation">
-
-<label>Status:</label>
-<select id="status">
-    <option value="[b][color=#00BF00]ALIVE[/color][/b]">Alive</option>
-    <option value="[b][color=#FF0000]DECEASED[/color][/b]">Deceased</option>
-    <option value="[b]UNKNOWN[/b]">Unknown</option>
-</select>
-
-<label>MDC Link:</label>
-<input type="text" id="mdc">
-
-<label>SAN-GANG Link:</label>
-<input type="text" id="san">
-
-<!-- Threat Analysis -->
-<label>Threat Level:</label>
-<select id="threat">
-    <option value="[b][color=#1E90FF]LOW[/color][/b]">LOW</option>
-    <option value="[b][color=#FFA500]MEDIUM[/color][/b]">MEDIUM</option>
-    <option value="[b][color=#FF0000]HIGH[/color][/b]">HIGH</option>
-</select>
-
-<label>Threat Explanation:</label>
-<textarea id="threatDesc" rows="4"></textarea>
-
-<!-- Gang Criteria -->
-<h3>SANG-GANG Classification Criteria</h3>
-<div class="checkbox-group">
-    <label><input type="checkbox" class="criteria" value="A"> A. Court ruled gang member</label>
-    <label><input type="checkbox" class="criteria" value="B"> B. Gang markings (tattoos, scars)</label>
-    <label><input type="checkbox" class="criteria" value="C"> C. Self-proclaimed gang member</label>
-    <label><input type="checkbox" class="criteria" value="D"> D. Arrested with known gang members</label>
-    <label><input type="checkbox" class="criteria" value="E"> E. Identified by confidential informant</label>
-    <label><input type="checkbox" class="criteria" value="F"> F. Associating with gang members</label>
-    <label><input type="checkbox" class="criteria" value="G"> G. Displays gang symbols/signs</label>
-    <label><input type="checkbox" class="criteria" value="H"> H. Frequenting gang areas</label>
+    <label>Handler:</label>
+    <input type="text" id="handler" placeholder="Enter handler name">
 </div>
 
-<!-- Physical Description -->
-<label>Height:</label>
-<input type="text" id="height">
-<label>Weight:</label>
-<input type="text" id="weight">
-<label>Hair / Eyes:</label>
-<input type="text" id="hairEyes">
-<label>Tattoos (details):</label>
-<textarea id="tattoos" rows="3"></textarea>
+<div class="section">
+    <h3>Physical Description</h3>
+    <label>Height:</label>
+    <input type="text" id="height" placeholder="Enter height">
 
-<!-- Known Contacts -->
-<label>Known Properties (comma separated):</label>
-<input type="text" id="properties">
-<label>Known Phone Numbers (comma separated):</label>
-<input type="text" id="phones">
-<label>Known Associates (comma separated):</label>
-<input type="text" id="associates">
+    <label>Weight:</label>
+    <input type="text" id="weight" placeholder="Enter weight">
 
-<!-- Related Cases -->
-<label>Related Cases / IRs (comma separated):</label>
-<input type="text" id="cases">
+    <label>Hair / Eyes:</label>
+    <input type="text" id="hairEyes" placeholder="Enter hair and eye color">
 
-<button onclick="generateBBCode()">Generate BBCode</button>
+    <h4>Tattoos:</h4>
+    <label>Head:</label>
+    <input type="text" id="tatHead" placeholder="Tattoos on head">
+    <label>Chest:</label>
+    <input type="text" id="tatChest" placeholder="Tattoos on chest">
+    <label>Back:</label>
+    <input type="text" id="tatBack" placeholder="Tattoos on back">
+    <label>Left Arm:</label>
+    <input type="text" id="tatLeftArm" placeholder="Tattoos on left arm">
+    <label>Right Arm:</label>
+    <input type="text" id="tatRightArm" placeholder="Tattoos on right arm">
+    <label>Left Leg:</label>
+    <input type="text" id="tatLeftLeg" placeholder="Tattoos on left leg">
+    <label>Right Leg:</label>
+    <input type="text" id="tatRightLeg" placeholder="Tattoos on right leg">
+</div>
 
-<h2>Generated BBCode:</h2>
-<div id="output"></div>
+<div class="section">
+    <h3>SANG-GANG Classification Criteria</h3>
+    <p><b>Minimum one (1) criteria required:</b></p>
+    <div class="checkbox-group">
+        <label><input type="checkbox" class="criteria" value="A" data-label="Person has been ruled to be a gang member by a court"> A. Person has been ruled to be a gang member by a court</label>
+        <input type="text" placeholder="Details for A" class="criteria-detail" id="detail-A">
+        
+        <label><input type="checkbox" class="criteria" value="B" data-label="Person is marked in any permanent way with gang affiliated markings (e.g. tattoos, branding, scarring)"> B. Person is marked in any permanent way with gang affiliated markings (e.g. tattoos, branding, scarring)</label>
+        <input type="text" placeholder="Details for B" class="criteria-detail" id="detail-B">
+        
+        <label><input type="checkbox" class="criteria" value="C" data-label="Person has admitted to being a gang member (self-proclamation)"> C. Person has admitted to being a gang member (self-proclamation)</label>
+        <input type="text" placeholder="Details for C" class="criteria-detail" id="detail-C">
+    </div>
+
+    <p><b>Minimum two (2) criteria required:</b></p>
+    <div class="checkbox-group">
+        <label><input type="checkbox" class="criteria" value="D" data-label="Person has been arrested with known gang members for offenses consistent with gang activity"> D. Person has been arrested with known gang members for offenses consistent with gang activity</label>
+        <input type="text" placeholder="Details for D" class="criteria-detail" id="detail-D">
+
+        <label><input type="checkbox" class="criteria" value="E" data-label="Person identified as a gang member by a reliable confidential informant/source"> E. Person identified as a gang member by a reliable confidential informant/source</label>
+        <input type="text" placeholder="Details for E" class="criteria-detail" id="detail-E">
+
+        <label><input type="checkbox" class="criteria" value="F" data-label="Person documented associating with recorded gang members"> F. Person documented associating with recorded gang members</label>
+        <input type="text" placeholder="Details for F" class="criteria-detail" id="detail-F">
+
+        <label><input type="checkbox" class="criteria" value="G" data-label="Person documented displaying gang symbols and/or hand signs"> G. Person documented displaying gang symbols and/or hand signs</label>
+        <input type="text" placeholder="Details for G" class="criteria-detail" id="detail-G">
+
+        <label><input type="checkbox" class="criteria" value="H" data-label="Person documented by law enforcement frequenting gang areas"> H. Person documented by law enforcement frequenting gang areas</label>
+        <input type="text" placeholder="Details for H" class="criteria-detail" id="detail-H">
+    </div>
+</div>
+
+<div class="section">
+    <button onclick="generateBBCode()">Generate BBCode</button>
+    <button onclick="copyBBCode()">Copy to Clipboard</button>
+    <button onclick="resetForm()">Reset</button>
+</div>
+
+<div class="section">
+    <h3>Generated BBCode:</h3>
+    <textarea id="output" readonly></textarea>
 </div>
 
 <script>
 function generateBBCode() {
-    const name = document.getElementById('name').value;
-    const race = document.getElementById('race').value;
-    const sex = document.getElementById('sex').value;
-    const age = document.getElementById('age').value;
-    const affiliation = document.getElementById('affiliation').value;
-    const status = document.getElementById('status').value;
-    const mdc = document.getElementById('mdc').value;
-    const san = document.getElementById('san').value;
-    const threat = document.getElementById('threat').value;
-    const threatDesc = document.getElementById('threatDesc').value;
-
-    const criteriaElements = document.querySelectorAll('.criteria:checked');
-    let criteriaList = '';
-    criteriaElements.forEach(c => {
-        criteriaList += `[cb] ${c.value}. Criterion selected\n`;
-    });
-
+    const caseNumber = document.getElementById('caseNumber').value;
+    const poiName = document.getElementById('poiName').value;
+    const handler = document.getElementById('handler').value;
     const height = document.getElementById('height').value;
     const weight = document.getElementById('weight').value;
     const hairEyes = document.getElementById('hairEyes').value;
-    const tattoos = document.getElementById('tattoos').value;
-    const properties = document.getElementById('properties').value.split(',').map(p => `[*] ${p.trim()}`).join('\n');
-    const phones = document.getElementById('phones').value.split(',').map(p => `[*] ${p.trim()}`).join('\n');
-    const associates = document.getElementById('associates').value.split(',').map(a => `[*] ${a.trim()}`).join('\n');
-    const cases = document.getElementById('cases').value.split(',').map(c => `[*] ${c.trim()}`).join('\n');
 
-    const bbcode = `[divbox2=white]
+    // Tattoos
+    const tatHead = document.getElementById('tatHead').value;
+    const tatChest = document.getElementById('tatChest').value;
+    const tatBack = document.getElementById('tatBack').value;
+    const tatLeftArm = document.getElementById('tatLeftArm').value;
+    const tatRightArm = document.getElementById('tatRightArm').value;
+    const tatLeftLeg = document.getElementById('tatLeftLeg').value;
+    const tatRightLeg = document.getElementById('tatRightLeg').value;
 
-[aligntable=right,0,0,15,0,0,transparent]
-LOS SANTOS POLICE DEPT.
-DETECTIVE BUREAU
-MISSION ROW POLICE STATION
-SINNER STREET 1
-LOS SANTOS
-[/aligntable]
-[aligntable=left,0,15,0,0,0,transparent]
-[bwlspdlogo=130][/bwlspdlogo]
-[/aligntable]
+    const tattoosBBCode = `[b]Tattoos:[/b]
+[list]
+[*] Head: ${tatHead}
+[*] Chest: ${tatChest}
+[*] Back: ${tatBack}
+[*] Left Arm: ${tatLeftArm}
+[*] Right Arm: ${tatRightArm}
+[*] Left Leg: ${tatLeftLeg}
+[*] Right Leg: ${tatRightLeg}
+[/list]`;
 
-[color=transparent]tt[/color]
-[hr][/hr]
+    // Criteria
+    const criteriaElements = document.querySelectorAll('.criteria:checked');
+    let criteriaListOne = '';
+    let criteriaListTwo = '';
 
-[divbox=#083a6b][b][color=#FFFFFF]PERSONAL INFORMATION[/color][/b][/divbox]
+    criteriaElements.forEach(c => {
+        const detail = document.getElementById(`detail-${c.value}`).value || 'No details provided';
+        const label = c.getAttribute('data-label');
+        const line = `[cb] ${c.value}. ${label}\n[spoiler]${detail}[/spoiler]\n\n`;
+
+        if (['A', 'B', 'C'].includes(c.value)) {
+            criteriaListOne += line;
+        } else {
+            criteriaListTwo += line;
+        }
+    });
+
+    const criteriaBBCode = `[altspoiler=Criteria Identified]
 [divbox=white]
-[aligntable=left,0,0,10,0,0,0]
-[img width=150 height=150]https://i.imgur.com/RvO2yL5.png?1[/img]
-[/aligntable]
-[aligntable=left,0,10,0,0,0,0]
-[b]NAME:[/b] ${name}
-[b]RACE:[/b] ${race}
-[b]SEX:[/b] ${sex}
-[b]AGE:[/b] ${age}
-[b]Affiliation:[/b] ${affiliation}
-[b]Status:[/b] ${status}
+[b][i]Minimum one (1) criteria required:[/i][/b]
 
-[url=${mdc}]MDC Record[/url] | [url=${san}]SAN-GANG File[/url]
-[/aligntable]
+${criteriaListOne || '[i]None selected[/i]'}
+
 [/divbox]
 
-[hr][/hr]
-
-[divbox=#083a6b][b][color=#FFFFFF]THREAT ANALYSIS[/color][/b][/divbox]
 [divbox=white]
-[b]Threat Level:[/b] ${threat}
+[b][i]Minimum two (2) criteria required:[/i][/b]
 
-${threatDesc}
+${criteriaListTwo || '[i]None selected[/i]'}
+
 [/divbox]
+[/altspoiler]`;
 
-[hr][/hr]
+    const bbcode = `[divbox=white]
+[b]Case File:[/b] ${caseNumber}
+[b]POI:[/b] ${poiName}
+[b]Handler:[/b] ${handler}
 
-[divbox=#083a6b][b][color=#FFFFFF]SANG-GANG CLASSIFICATION CRITERIA[/color][/b][/divbox]
-[altspoiler=Criteria Identified]
-[divbox=white]
-${criteriaList}
-[/divbox]
-[/altspoiler]
-
-[hr][/hr]
-
-[divbox=#083a6b][b][color=#FFFFFF]PHYSICAL DESCRIPTION[/color][/b][/divbox]
-[divbox=white]
 [b]Height:[/b] ${height}
 [b]Weight:[/b] ${weight}
 [b]Hair / Eyes:[/b] ${hairEyes}
-[b]Tattoos:[/b] ${tattoos}
-[/divbox]
 
-[hr][/hr]
+${tattoosBBCode}
 
-[divbox=#083a6b][b][color=#FFFFFF]KNOWN CONTACTS & ASSETS[/color][/b][/divbox]
-[divbox=white]
-[b]Known Properties:[/b]
-[list]
-${properties}
-[/list]
+${criteriaBBCode}
+[/divbox]`;
 
-[b]Known Phone Numbers:[/b]
-[list]
-${phones}
-[/list]
+    document.getElementById('output').value = bbcode;
+}
 
-[b]Known Associates:[/b]
-[list]
-${associates}
-[/list]
-[/divbox]
+function copyBBCode() {
+    const output = document.getElementById('output');
+    output.select();
+    document.execCommand('copy');
+    alert('BBCode copied to clipboard!');
+}
 
-[hr][/hr]
-
-[divbox=#083a6b][b][color=#FFFFFF]RELATED CASES / INCIDENT REPORTS[/color][/b][/divbox]
-[divbox=white]
-[list]
-${cases}
-[/list]
-[/divbox]
-
-[hr][/hr]
-[center][divbox=#083a6b][color=#FFFFFF][size=85]CONFIDENTIAL - FOR DETECTIVE BUREAU USE ONLY[/size][/color][/divbox][/center]
-
-[/divbox2]`;
-
-    document.getElementById('output').textContent = bbcode;
+function resetForm() {
+    document.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+    document.querySelectorAll('.criteria').forEach(c => c.checked = false);
+    document.getElementById('output').value = '';
 }
 </script>
+
 </body>
 </html>
