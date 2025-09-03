@@ -1,217 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LSPD POI Generator</title>
+<meta charset="UTF-8">
+<title>POI BBCode Generator</title>
 <style>
-  :root{
-    --lspd-blue:#083a6b;
-    --lspd-blue-dark:#0d4d8d;
-    --bg:#f4f6f9;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:#0f2544}
-  header{padding:24px 16px;text-align:center;background:linear-gradient(180deg,var(--lspd-blue),#0b3d6a);color:#fff}
-  header h1{margin:0;font-size:1.5rem;letter-spacing:.5px}
-  .wrap{max-width:1100px;margin:20px auto;padding:16px}
-  .card{
-    background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(8,58,107,.08);
-    padding:18px;margin-bottom:16px;border:1px solid rgba(8,58,107,.08)
-  }
-  .title{
-    background:var(--lspd-blue);color:#fff;padding:8px 12px;border-radius:8px;margin:-4px 0 12px;
-    font-weight:700;letter-spacing:.2px
-  }
-  label{display:block;font-weight:700;margin:10px 0 6px}
-  input[type="text"], input[type="url"], textarea, select{
-    width:100%;padding:10px;border:1px solid #c9d3e1;border-radius:8px;font-size:14px;margin-bottom:8px
-  }
-  textarea{min-height:80px;resize:vertical}
-  .grid{display:grid;gap:12px}
-  .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .btns{display:flex;flex-wrap:wrap;gap:8px}
-  button{
-    background:var(--lspd-blue);color:#fff;border:0;border-radius:10px;padding:10px 14px;
-    cursor:pointer;font-weight:600
-  }
-  button:hover{background:var(--lspd-blue-dark)}
-  #output{width:100%;height:380px;font-family:Consolas,Menlo,monospace;margin-top:12px}
-  #preview{white-space:pre-wrap;background:#f9fbff;border:1px solid #d2dcef;padding:12px;border-radius:10px;overflow:auto;margin-top:12px}
+body { font-family: Arial, sans-serif; background:#f0f0f0; padding:20px; }
+label { display:block; margin:5px 0; }
+textarea { width: 100%; height:50px; margin:5px 0; }
+input[type=text], select { width:100%; margin:5px 0; }
+fieldset { margin-bottom:15px; padding:10px; }
 </style>
 </head>
 <body>
-<header>
-  <h1>LSPD POI Generator</h1>
-  <div class="small">Generates your full forum post using your template.</div>
-</header>
 
-<div class="wrap">
+<h2>POI BBCode Generator</h2>
 
-  <!-- PERSONAL INFORMATION -->
-  <div class="card">
-    <div class="title">PERSONAL INFORMATION</div>
-    <div class="grid g2">
-      <div>
-        <label>NAME</label>
-        <input type="text" id="name" placeholder="e.g., John Doe">
-      </div>
-      <div>
-        <label>RACE</label>
-        <input type="text" id="race" placeholder="e.g., White / Hispanic / etc.">
-      </div>
-      <div>
-        <label>SEX</label>
-        <select id="sex">
-          <option value="M">M</option>
-          <option value="F">F</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label>AGE</label>
-        <input type="text" id="age" placeholder="e.g., 28">
-      </div>
-      <div>
-        <label>Affiliation</label>
-        <input type="text" id="affiliation" placeholder="e.g., Gang/Group Name">
-      </div>
-      <div>
-        <label>Status</label>
-        <select id="status">
-          <option value="[b][color=#00BF00]ALIVE[/color][/b]">ALIVE</option>
-          <option value="[b][color=#FF0000]DECEASED[/color][/b]">DECEASED</option>
-          <option value="[b]UNKNOWN[/b]">UNKNOWN</option>
-        </select>
-      </div>
-      <div>
-        <label>Image URL</label>
-        <input type="url" id="imgUrl" placeholder="https://..." value="https://i.imgur.com/RvO2yL5.png?1">
-      </div>
-      <div>
-        <label>MDC Link</label>
-        <input type="url" id="mdc" placeholder="https://mdc-link">
-      </div>
-      <div>
-        <label>SAN-GANG Link</label>
-        <input type="url" id="san" placeholder="https://san-gang-link">
-      </div>
-    </div>
-  </div>
+<fieldset>
+<legend>Personal Information</legend>
+<label>Name:<input type="text" id="name"></label>
+<label>Race:<input type="text" id="race"></label>
+<label>Sex:
+  <select id="sex">
+    <option value="M">M</option>
+    <option value="F">F</option>
+  </select>
+</label>
+<label>Age:<input type="text" id="age"></label>
+<label>Affiliation:<input type="text" id="affiliation"></label>
+<label>Status:
+  <select id="status">
+    <option value="[b][color=#00BF00]ALIVE[/color][/b]">ALIVE</option>
+    <option value="[b][color=#FF0000]DECEASED[/color][/b]">DECEASED</option>
+    <option value="[b]UNKNOWN[/b]">UNKNOWN</option>
+  </select>
+</label>
+<label>MDC Link:<input type="text" id="mdcLink"></label>
+<label>SAN-GANG Link:<input type="text" id="sanLink"></label>
+</fieldset>
 
-  <!-- THREAT ANALYSIS -->
-  <div class="card">
-    <div class="title">THREAT ANALYSIS</div>
-    <label>Threat Level</label>
-    <select id="threat">
-      <option value="[b][color=#1E90FF]LOW[/color][/b]">LOW</option>
-      <option value="[b][color=#FFA500]MEDIUM[/color][/b]">MEDIUM</option>
-      <option value="[b][color=#FF0000]HIGH[/color][/b]">HIGH</option>
-    </select>
-    <label>Explanation</label>
-    <textarea id="threatDesc" placeholder="Provide a detailed explanation of the threat level assigned to this POI."></textarea>
-  </div>
+<fieldset>
+<legend>Threat Analysis</legend>
+<label>Threat Level:
+<select id="threat">
+  <option value="[b][color=#1E90FF]LOW[/color][/b]">LOW</option>
+  <option value="[b][color=#FFA500]MEDIUM[/color][/b]">MEDIUM</option>
+  <option value="[b][color=#FF0000]HIGH[/color][/b]">HIGH</option>
+</select>
+</label>
+<label>Threat Details:<textarea id="threatDetails"></textarea></label>
+</fieldset>
 
-  <!-- PHYSICAL DESCRIPTION -->
-  <div class="card">
-    <div class="title">PHYSICAL DESCRIPTION</div>
-    <div class="grid g3">
-      <div>
-        <label>Height</label>
-        <input type="text" id="height" placeholder="e.g., 6'1&quot;">
-      </div>
-      <div>
-        <label>Weight</label>
-        <input type="text" id="weight" placeholder="e.g., 180 lbs">
-      </div>
-      <div>
-        <label>Hair / Eyes</label>
-        <input type="text" id="hairEyes" placeholder="e.g., Brown / Hazel">
-      </div>
-    </div>
-    <label>Tattoos</label>
-    <div class="grid g2">
-      <input type="text" id="tatHead" placeholder="Head">
-      <input type="text" id="tatChest" placeholder="Chest">
-      <input type="text" id="tatBack" placeholder="Back">
-      <input type="text" id="tatLeftArm" placeholder="Left Arm">
-      <input type="text" id="tatRightArm" placeholder="Right Arm">
-      <input type="text" id="tatLeftLeg" placeholder="Left Leg">
-      <input type="text" id="tatRightLeg" placeholder="Right Leg">
-    </div>
-  </div>
+<fieldset>
+<legend>SANG-GANG Criteria</legend>
+<p><b>Minimum one (1) criteria required:</b></p>
+<label><input type="checkbox" id="A"> A. Person ruled gang member by court</label>
+<textarea id="evidenceA" placeholder="Evidence / Reference / FIC / IR"></textarea>
 
-  <!-- CONTACTS & CASES -->
-  <div class="card">
-    <label>Known Properties</label>
-    <textarea id="props"></textarea>
-    <label>Known Phone Numbers</label>
-    <textarea id="phones"></textarea>
-    <label>Known Associates</label>
-    <textarea id="associates"></textarea>
-    <label>Related Cases / IRs</label>
-    <textarea id="cases"></textarea>
-  </div>
+<label><input type="checkbox" id="B"> B. Person marked with gang tattoos/branding</label>
+<textarea id="evidenceB" placeholder="Evidence / Reference / FIC / IR"></textarea>
 
-  <!-- ACTIONS -->
-  <div class="card">
-    <div class="btns">
-      <button id="btnGen">Generate</button>
-      <button id="btnCopy">Copy</button>
-      <button id="btnReset">Reset</button>
-    </div>
-  </div>
+<label><input type="checkbox" id="C"> C. Self-proclaims gang membership</label>
+<textarea id="evidenceC" placeholder="Evidence / Reference / FIC / IR"></textarea>
 
-  <!-- OUTPUT -->
-  <div class="card">
-    <div class="title">Generated BBCode</div>
-    <textarea id="output" readonly></textarea>
-  </div>
+<p><b>Minimum two (2) criteria required:</b></p>
+<label><input type="checkbox" id="D"> D. Arrested with gang members for gang offenses</label>
+<textarea id="evidenceD" placeholder="Evidence / Reference / FIC / IR"></textarea>
 
-  <!-- PREVIEW -->
-  <div class="card">
-    <div class="title">Preview</div>
-    <div id="preview"></div>
-  </div>
+<label><input type="checkbox" id="E"> E. Identified by reliable CI/source</label>
+<textarea id="evidenceE" placeholder="Evidence / Reference / FIC / IR"></textarea>
 
-</div>
+<label><input type="checkbox" id="F"> F. Documented associating with gang members</label>
+<textarea id="evidenceF" placeholder="Evidence / Reference / FIC / IR"></textarea>
+
+<label><input type="checkbox" id="G"> G. Displaying gang symbols / hand signs</label>
+<textarea id="evidenceG" placeholder="Evidence / Reference / FIC / IR"></textarea>
+
+<label><input type="checkbox" id="H"> H. Documented frequenting gang areas</label>
+<textarea id="evidenceH" placeholder="Evidence / Reference / FIC / IR"></textarea>
+</fieldset>
+
+<fieldset>
+<legend>Physical Description</legend>
+<label>Height:<input type="text" id="height"></label>
+<label>Weight:<input type="text" id="weight"></label>
+<label>Hair / Eyes:<input type="text" id="hairEyes"></label>
+<label>Tattoos:<input type="text" id="tattoos"></label>
+<label>Head:<input type="text" id="head"></label>
+<label>Chest:<input type="text" id="chest"></label>
+<label>Back:<input type="text" id="back"></label>
+<label>Left Arm:<input type="text" id="larm"></label>
+<label>Right Arm:<input type="text" id="rarm"></label>
+<label>Left Leg:<input type="text" id="lleg"></label>
+<label>Right Leg:<input type="text" id="rleg"></label>
+</fieldset>
+
+<fieldset>
+<legend>Contacts & Assets</legend>
+<label>Known Properties:<textarea id="properties"></textarea></label>
+<label>Known Phone Numbers:<textarea id="phones"></textarea></label>
+<label>Known Associates:<textarea id="associates"></textarea></label>
+</fieldset>
+
+<fieldset>
+<legend>Related Cases / Incidents</legend>
+<label><textarea id="cases"></textarea></label>
+</fieldset>
+
+<button onclick="generateBBCode()">Generate BBCode</button>
+<textarea id="output" style="width:100%; height:400px; margin-top:20px;"></textarea>
 
 <script>
-function toList(text){
-  let items = text.split(/\r?\n/).map(s=>s.trim()).filter(s=>s.length>0);
-  while(items.length<3) items.push("");
-  return items.map(s=>"[*] "+s).join("\n");
-}
+function generateBBCode() {
+  const name = document.getElementById('name').value;
+  const race = document.getElementById('race').value;
+  const sex = document.getElementById('sex').value;
+  const age = document.getElementById('age').value;
+  const affiliation = document.getElementById('affiliation').value;
+  const status = document.getElementById('status').value;
+  const mdc = document.getElementById('mdcLink').value || "MDCLINKHERE";
+  const san = document.getElementById('sanLink').value || "SANFILELINKHERE";
+  const threat = document.getElementById('threat').value;
+  const threatDetails = document.getElementById('threatDetails').value;
 
-function generate(){
-  const name=document.getElementById('name').value||"";
-  const race=document.getElementById('race').value||"";
-  const sex=document.getElementById('sex').value||"M / F";
-  const age=document.getElementById('age').value||"";
-  const affiliation=document.getElementById('affiliation').value||"";
-  const status=document.getElementById('status').value;
-  const imgUrl=document.getElementById('imgUrl').value||"https://i.imgur.com/RvO2yL5.png?1";
-  const mdc=document.getElementById('mdc').value||"MDCLINKHERE";
-  const san=document.getElementById('san').value||"SANFILELINKHERE";
-  const threat=document.getElementById('threat').value;
-  const threatDesc=document.getElementById('threatDesc').value||"Provide a detailed explanation of the threat level assigned to this POI. Include behavioral patterns, known criminal history, affiliations, previous incidents, and risk to officers or public safety.";
-  const height=document.getElementById('height').value||"";
-  const weight=document.getElementById('weight').value||"";
-  const hairEyes=document.getElementById('hairEyes').value||"";
-  const tatHead=document.getElementById('tatHead').value||"";
-  const tatChest=document.getElementById('tatChest').value||"";
-  const tatBack=document.getElementById('tatBack').value||"";
-  const tatLeftArm=document.getElementById('tatLeftArm').value||"";
-  const tatRightArm=document.getElementById('tatRightArm').value||"";
-  const tatLeftLeg=document.getElementById('tatLeftLeg').value||"";
-  const tatRightLeg=document.getElementById('tatRightLeg').value||"";
-  const props=toList(document.getElementById('props').value);
-  const phones=toList(document.getElementById('phones').value);
-  const associates=toList(document.getElementById('associates').value);
-  const cases=toList(document.getElementById('cases').value);
+  const criteria = ['A','B','C','D','E','F','G','H'];
+  let sangBB = '';
+  criteria.forEach(c => {
+    const cb = document.getElementById(c);
+    const evidence = document.getElementById('evidence'+c).value;
+    if(cb.checked) {
+      sangBB += `[cb] ${c}. ${document.querySelector('label[for='+c+']')?.textContent.replace(c+'. ','')} \n[spoiler]${evidence}[/spoiler]\n\n`;
+    }
+  });
 
-  const bbcode=`[divbox2=white]
+  const output = `[divbox2=white]
 
 [aligntable=right,0,0,15,0,0,transparent]
 LOS SANTOS POLICE DEPT.
@@ -230,15 +151,15 @@ LOS SANTOS
 [divbox=#083a6b][b][color=#FFFFFF]PERSONAL INFORMATION[/color][/b][/divbox]
 [divbox=white]
 [aligntable=left,0,0,10,0,0,0]
-[img width=150 height=150]${imgUrl}[/img]
+[img width=150 height=150]https://i.imgur.com/RvO2yL5.png?1[/img]
 [/aligntable]
 [aligntable=left,0,10,0,0,0,0]
-[b]NAME:[/b]  ${name}
-[b]RACE:[/b]  ${race}
-[b]SEX:[/b] ${sex}
-[b]AGE:[/b]  ${age}
-[b]Affiliation:[/b]  ${affiliation}
-[b]Status:[/b] [b][color=#00BF00]ALIVE[/color][/b] / [b][color=#FF0000]DECEASED[/color][/b] / [b]UNKNOWN[/b]
+[b]NAME:[/b] ${name}  
+[b]RACE:[/b] ${race}  
+[b]SEX:[/b] ${sex}  
+[b]AGE:[/b] ${age}  
+[b]Affiliation:[/b] ${affiliation}  
+[b]Status:[/b] ${status}  
 [url=${mdc}]MDC Record[/url] | [url=${san}]SAN-GANG File[/url]
 [/aligntable]
 [/divbox]
@@ -247,27 +168,34 @@ LOS SANTOS
 
 [divbox=#083a6b][b][color=#FFFFFF]THREAT ANALYSIS[/color][/b][/divbox]
 [divbox=white]
-[b]Threat Level:[/b] [b][color=#1E90FF]LOW[/color][/b] / [b][color=#FFA500]MEDIUM[/color][/b] / [b][color=#FF0000]HIGH[/color][/b]
-
-${threatDesc}
+[b]Threat Level:[/b] ${threat}  
+${threatDetails}
 [/divbox]
 
 [hr][/hr]
 
+[divbox=#083a6b][b][color=#FFFFFF]SANG-GANG CLASSIFICATION CRITERIA[/color][/b][/divbox]
+[altspoiler=Criteria Identified]
+[divbox=white]
+${sangBB}
+[/divbox]
+[/altspoiler]
+[hr][/hr]
+
 [divbox=#083a6b][b][color=#FFFFFF]PHYSICAL DESCRIPTION[/color][/b][/divbox]
 [divbox=white]
-[b]Height:[/b]  ${height}
-[b]Weight:[/b]  ${weight}
-[b]Hair / Eyes:[/b]  ${hairEyes}
-[b]Tattoos:[/b]
+[b]Height:[/b] ${document.getElementById('height').value}  
+[b]Weight:[/b] ${document.getElementById('weight').value}  
+[b]Hair / Eyes:[/b] ${document.getElementById('hairEyes').value}  
+[b]Tattoos:[/b] ${document.getElementById('tattoos').value}  
 [list]
-[*] Head: ${tatHead}
-[*] Chest: ${tatChest}
-[*] Back: ${tatBack}
-[*] Left Arm: ${tatLeftArm}
-[*] Right Arm: ${tatRightArm}
-[*] Left Leg: ${tatLeftLeg}
-[*] Right Leg: ${tatRightLeg}
+[*] Head: ${document.getElementById('head').value}  
+[*] Chest: ${document.getElementById('chest').value}  
+[*] Back: ${document.getElementById('back').value}  
+[*] Left Arm: ${document.getElementById('larm').value}  
+[*] Right Arm: ${document.getElementById('rarm').value}  
+[*] Left Leg: ${document.getElementById('lleg').value}  
+[*] Right Leg: ${document.getElementById('rleg').value}  
 [/list]
 [/divbox]
 
@@ -277,17 +205,17 @@ ${threatDesc}
 [divbox=white]
 [b]Known Properties:[/b]
 [list]
-${props}
+[*] ${document.getElementById('properties').value.replace(/\n/g,'\n[*] ')}
 [/list]
 
 [b]Known Phone Numbers:[/b]
 [list]
-${phones}
+[*] ${document.getElementById('phones').value.replace(/\n/g,'\n[*] ')}
 [/list]
 
 [b]Known Associates:[/b]
 [list]
-${associates}
+[*] ${document.getElementById('associates').value.replace(/\n/g,'\n[*] ')}
 [/list]
 [/divbox]
 
@@ -296,7 +224,7 @@ ${associates}
 [divbox=#083a6b][b][color=#FFFFFF]RELATED CASES / INCIDENT REPORTS[/color][/b][/divbox]
 [divbox=white]
 [list]
-${cases}
+[*] ${document.getElementById('cases').value.replace(/\n/g,'\n[*] ')}
 [/list]
 [/divbox]
 
@@ -305,27 +233,6 @@ ${cases}
 
 [/divbox2]`;
 
-  document.getElementById('output').value=bbcode;
-  document.getElementById('preview').textContent=bbcode;
+  document.getElementById('output').value = output;
 }
-
-// Button events
-document.getElementById('btnGen').addEventListener('click',e=>{e.preventDefault(); generate();});
-document.getElementById('btnCopy').addEventListener('click',e=>{
-  e.preventDefault();
-  const out=document.getElementById('output');
-  out.select();
-  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(out.value).then(()=>alert("Copied!"));} else {document.execCommand('copy'); alert("Copied!");}
-});
-document.getElementById('btnReset').addEventListener('click',e=>{
-  e.preventDefault();
-  document.querySelectorAll('input,textarea').forEach(el=>el.value='');
-  document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
-  document.getElementById('output').value='';
-  document.getElementById('preview').textContent='';
-});
 </script>
-
-</body>
-</html>
-
