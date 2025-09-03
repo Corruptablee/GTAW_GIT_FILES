@@ -49,7 +49,7 @@
     }
     #output {
         width: 100%;
-        height: 350px;
+        height: 300px;
         margin-top: 15px;
     }
 </style>
@@ -67,34 +67,6 @@
 
     <label>Handler:</label>
     <input type="text" id="handler" placeholder="Enter handler name">
-</div>
-
-<div class="section">
-    <h3>Physical Description</h3>
-    <label>Height:</label>
-    <input type="text" id="height" placeholder="Enter height">
-
-    <label>Weight:</label>
-    <input type="text" id="weight" placeholder="Enter weight">
-
-    <label>Hair / Eyes:</label>
-    <input type="text" id="hairEyes" placeholder="Enter hair and eye color">
-
-    <h4>Tattoos:</h4>
-    <label>Head:</label>
-    <input type="text" id="tatHead" placeholder="Tattoos on head">
-    <label>Chest:</label>
-    <input type="text" id="tatChest" placeholder="Tattoos on chest">
-    <label>Back:</label>
-    <input type="text" id="tatBack" placeholder="Tattoos on back">
-    <label>Left Arm:</label>
-    <input type="text" id="tatLeftArm" placeholder="Tattoos on left arm">
-    <label>Right Arm:</label>
-    <input type="text" id="tatRightArm" placeholder="Tattoos on right arm">
-    <label>Left Leg:</label>
-    <input type="text" id="tatLeftLeg" placeholder="Tattoos on left leg">
-    <label>Right Leg:</label>
-    <input type="text" id="tatRightLeg" placeholder="Tattoos on right leg">
 </div>
 
 <div class="section">
@@ -146,31 +118,7 @@ function generateBBCode() {
     const caseNumber = document.getElementById('caseNumber').value;
     const poiName = document.getElementById('poiName').value;
     const handler = document.getElementById('handler').value;
-    const height = document.getElementById('height').value;
-    const weight = document.getElementById('weight').value;
-    const hairEyes = document.getElementById('hairEyes').value;
 
-    // Tattoos
-    const tatHead = document.getElementById('tatHead').value;
-    const tatChest = document.getElementById('tatChest').value;
-    const tatBack = document.getElementById('tatBack').value;
-    const tatLeftArm = document.getElementById('tatLeftArm').value;
-    const tatRightArm = document.getElementById('tatRightArm').value;
-    const tatLeftLeg = document.getElementById('tatLeftLeg').value;
-    const tatRightLeg = document.getElementById('tatRightLeg').value;
-
-    const tattoosBBCode = `[b]Tattoos:[/b]
-[list]
-[*] Head: ${tatHead}
-[*] Chest: ${tatChest}
-[*] Back: ${tatBack}
-[*] Left Arm: ${tatLeftArm}
-[*] Right Arm: ${tatRightArm}
-[*] Left Leg: ${tatLeftLeg}
-[*] Right Leg: ${tatRightLeg}
-[/list]`;
-
-    // Criteria
     const criteriaElements = document.querySelectorAll('.criteria:checked');
     let criteriaListOne = '';
     let criteriaListTwo = '';
@@ -207,12 +155,6 @@ ${criteriaListTwo || '[i]None selected[/i]'}
 [b]Case File:[/b] ${caseNumber}
 [b]POI:[/b] ${poiName}
 [b]Handler:[/b] ${handler}
-
-[b]Height:[/b] ${height}
-[b]Weight:[/b] ${weight}
-[b]Hair / Eyes:[/b] ${hairEyes}
-
-${tattoosBBCode}
 
 ${criteriaBBCode}
 [/divbox]`;
