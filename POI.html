@@ -62,6 +62,13 @@
       <div><label>RACE</label><input type="text" id="race" placeholder="e.g., White / Hispanic / etc."></div>
       <div><label>AGE</label><input type="text" id="age" placeholder="e.g., 28"></div>
       <div><label>Affiliation</label><input type="text" id="affiliation" placeholder="e.g., Gang/Group Name"></div>
+      <div><label>SEX</label>
+        <select id="sex">
+          <option value="[b]M[/b]">M</option>
+          <option value="[b]F[/b]">F</option>
+          <option value="[b]Other[/b]">Other</option>
+        </select>
+      </div>
       <div><label>Status</label>
         <select id="status">
           <option value="[b][color=#00BF00]ALIVE[/color][/b]">ALIVE</option>
@@ -73,7 +80,6 @@
       <div><label>MDC Link</label><input type="url" id="mdc" placeholder="https://mdc-link"></div>
       <div><label>SAN-GANG Link</label><input type="url" id="san" placeholder="https://san-gang-link"></div>
     </div>
-    <div class="muted inline-help">Note: SEX line remains "M / F" to match your original code.</div>
   </div>
 
   <!-- THREAT ANALYSIS -->
@@ -202,6 +208,7 @@ function generate(){
   const name = document.getElementById('name').value||'John Doe';
   const race = document.getElementById('race').value||'White';
   const age = document.getElementById('age').value||'30';
+  const sex = document.getElementById('sex').value || '[b]M[/b]';
   const affiliation = document.getElementById('affiliation').value||'Gang';
   const status = document.getElementById('status').value;
   const imgUrl = document.getElementById('imgUrl').value||'https://i.imgur.com/RvO2yL5.png?1';
@@ -238,7 +245,7 @@ function generate(){
 [b]NAME:[/b] ${name}
 [b]RACE:[/b] ${race}
 [b]AGE:[/b] ${age}
-[b]SEX:[/b] M / F
+[b]SEX:[/b] ${sex}
 [b]STATUS:[/b] ${status}
 [b]AFFILIATION:[/b] ${affiliation}
 [b]MDC LINK:[/b] ${mdc}
@@ -301,4 +308,5 @@ generate();
 
 </body>
 </html>
+
 
