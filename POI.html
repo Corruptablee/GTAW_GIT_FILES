@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LSPD DB POI Generator</title>
+<title>LSPD POI Generator</title>
 <style>
   :root{
     --lspd-blue:#083a6b;
@@ -17,39 +17,34 @@
   .wrap{max-width:1100px;margin:20px auto;padding:16px}
   .card{
     background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(8,58,107,.08);
-    padding:20px;margin-bottom:16px;border:1px solid rgba(8,58,107,.08)
+    padding:18px;margin-bottom:16px;border:1px solid rgba(8,58,107,.08)
   }
   .title{
-    background:var(--lspd-blue);color:#fff;padding:10px 14px;border-radius:8px;margin:-6px 0 14px;
+    background:var(--lspd-blue);color:#fff;padding:8px 12px;border-radius:8px;margin:-4px 0 12px;
     font-weight:700;letter-spacing:.2px
   }
   label{display:block;font-weight:700;margin:10px 0 6px}
   input[type="text"], input[type="url"], textarea, select{
-    width:100%;padding:12px;border:1px solid #c9d3e1;border-radius:10px;font-size:14px;margin-bottom:10px;
+    width:100%;padding:10px;border:1px solid #c9d3e1;border-radius:8px;font-size:14px;margin-bottom:8px
   }
-  textarea{min-height:90px;resize:vertical}
-  .grid{display:grid;gap:16px}
+  textarea{min-height:80px;resize:vertical}
+  .grid{display:grid;gap:12px}
   .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
   .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .muted{color:#51607a;font-size:12px;margin-bottom:10px}
-  .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+  .btns{display:flex;flex-wrap:wrap;gap:8px}
   button{
-    background:var(--lspd-blue);color:#fff;border:0;border-radius:10px;padding:10px 16px;
+    background:var(--lspd-blue);color:#fff;border:0;border-radius:10px;padding:10px 14px;
     cursor:pointer;font-weight:600
   }
   button:hover{background:var(--lspd-blue-dark)}
-  #output{width:100%;height:380px;font-family:Consolas,Menlo,monospace;margin-top:10px}
-  #preview{white-space:pre-wrap;background:#f9fbff;border:1px solid #d2dcef;padding:12px;border-radius:10px;overflow:auto;margin-top:10px}
-  .crit-row{margin-bottom:12px}
-  .spoiler-input{display:none;margin-top:6px;padding:10px;border:1px solid #c9d3e1;border-radius:8px}
-  .inline-help{font-weight:400;display:inline;margin-left:6px}
-  .small{font-size:12px}
+  #output{width:100%;height:380px;font-family:Consolas,Menlo,monospace;margin-top:12px}
+  #preview{white-space:pre-wrap;background:#f9fbff;border:1px solid #d2dcef;padding:12px;border-radius:10px;overflow:auto;margin-top:12px}
 </style>
 </head>
 <body>
 <header>
   <h1>LSPD POI BBCode Generator</h1>
-  <div class="small">Generates you a POI for the use of DB Files.</div>
+  <div class="small">Generates your full forum post using your template.</div>
 </header>
 
 <div class="wrap">
@@ -58,96 +53,113 @@
   <div class="card">
     <div class="title">PERSONAL INFORMATION</div>
     <div class="grid g2">
-      <div><label>NAME</label><input type="text" id="name" placeholder="e.g., John Doe"></div>
-      <div><label>RACE</label><input type="text" id="race" placeholder="e.g., White / Hispanic / etc."></div>
-      <div><label>AGE</label><input type="text" id="age" placeholder="e.g., 28"></div>
-      <div><label>Affiliation</label><input type="text" id="affiliation" placeholder="e.g., Gang/Group Name"></div>
-      <div><label>SEX</label>
+      <div>
+        <label>NAME</label>
+        <input type="text" id="name" placeholder="e.g., John Doe">
+      </div>
+      <div>
+        <label>RACE</label>
+        <input type="text" id="race" placeholder="e.g., White / Hispanic / etc.">
+      </div>
+      <div>
+        <label>SEX</label>
         <select id="sex">
-          <option value="[b]M[/b]">M</option>
-          <option value="[b]F[/b]">F</option>
-          <option value="[b]Other[/b]">Other</option>
+          <option value="M">M</option>
+          <option value="F">F</option>
+          <option value="Other">Other</option>
         </select>
       </div>
-      <div><label>Status</label>
+      <div>
+        <label>AGE</label>
+        <input type="text" id="age" placeholder="e.g., 28">
+      </div>
+      <div>
+        <label>Affiliation</label>
+        <input type="text" id="affiliation" placeholder="e.g., Gang/Group Name">
+      </div>
+      <div>
+        <label>Status</label>
         <select id="status">
           <option value="[b][color=#00BF00]ALIVE[/color][/b]">ALIVE</option>
           <option value="[b][color=#FF0000]DECEASED[/color][/b]">DECEASED</option>
           <option value="[b]UNKNOWN[/b]">UNKNOWN</option>
         </select>
       </div>
-      <div><label>Image URL</label><input type="url" id="imgUrl" placeholder="https://..." value="https://i.imgur.com/RvO2yL5.png?1"></div>
-      <div><label>MDC Link</label><input type="url" id="mdc" placeholder="https://mdc-link"></div>
-      <div><label>SAN-GANG Link</label><input type="url" id="san" placeholder="https://san-gang-link"></div>
+      <div>
+        <label>Image URL</label>
+        <input type="url" id="imgUrl" placeholder="https://..." value="https://i.imgur.com/RvO2yL5.png?1">
+      </div>
+      <div>
+        <label>MDC Link</label>
+        <input type="url" id="mdc" placeholder="https://mdc-link">
+      </div>
+      <div>
+        <label>SAN-GANG Link</label>
+        <input type="url" id="san" placeholder="https://san-gang-link">
+      </div>
     </div>
   </div>
 
   <!-- THREAT ANALYSIS -->
   <div class="card">
     <div class="title">THREAT ANALYSIS</div>
-    <div class="grid g2">
-      <div>
-        <label>Threat Level</label>
-        <select id="threat">
-          <option value="[b][color=#1E90FF]LOW[/color][/b]">LOW</option>
-          <option value="[b][color=#FFA500]MEDIUM[/color][/b]">MEDIUM</option>
-          <option value="[b][color=#FF0000]HIGH[/color][/b]">HIGH</option>
-        </select>
-      </div>
-    </div>
+    <label>Threat Level</label>
+    <select id="threat">
+      <option value="[b][color=#1E90FF]LOW[/color][/b]">LOW</option>
+      <option value="[b][color=#FFA500]MEDIUM[/color][/b]">MEDIUM</option>
+      <option value="[b][color=#FF0000]HIGH[/color][/b]">HIGH</option>
+    </select>
     <label>Explanation</label>
-    <textarea id="threatDesc" placeholder="Provide a detailed explanation of the threat level assigned to this POI. Include behavioral patterns, known criminal history, affiliations, previous incidents, and risk to officers or public safety."></textarea>
+    <textarea id="threatDesc" placeholder="Provide a detailed explanation of the threat level assigned to this POI."></textarea>
   </div>
 
   <!-- PHYSICAL DESCRIPTION -->
   <div class="card">
     <div class="title">PHYSICAL DESCRIPTION</div>
     <div class="grid g3">
-      <div><label>Height</label><input type="text" id="height" placeholder="e.g., 6'1&quot;"></div>
-      <div><label>Weight</label><input type="text" id="weight" placeholder="e.g., 180 lbs"></div>
-      <div><label>Hair / Eyes</label><input type="text" id="hairEyes" placeholder="e.g., Brown / Hazel"></div>
+      <div>
+        <label>Height</label>
+        <input type="text" id="height" placeholder="e.g., 6'1&quot;">
+      </div>
+      <div>
+        <label>Weight</label>
+        <input type="text" id="weight" placeholder="e.g., 180 lbs">
+      </div>
+      <div>
+        <label>Hair / Eyes</label>
+        <input type="text" id="hairEyes" placeholder="e.g., Brown / Hazel">
+      </div>
     </div>
-    <label>Tattoos (by body part)</label>
+    <label>Tattoos</label>
     <div class="grid g2">
-      <div><input type="text" id="tatHead" placeholder="Head"></div>
-      <div><input type="text" id="tatChest" placeholder="Chest"></div>
-      <div><input type="text" id="tatBack" placeholder="Back"></div>
-      <div><input type="text" id="tatLeftArm" placeholder="Left Arm"></div>
-      <div><input type="text" id="tatRightArm" placeholder="Right Arm"></div>
-      <div><input type="text" id="tatLeftLeg" placeholder="Left Leg"></div>
-      <div><input type="text" id="tatRightLeg" placeholder="Right Leg"></div>
+      <input type="text" id="tatHead" placeholder="Head">
+      <input type="text" id="tatChest" placeholder="Chest">
+      <input type="text" id="tatBack" placeholder="Back">
+      <input type="text" id="tatLeftArm" placeholder="Left Arm">
+      <input type="text" id="tatRightArm" placeholder="Right Arm">
+      <input type="text" id="tatLeftLeg" placeholder="Left Leg">
+      <input type="text" id="tatRightLeg" placeholder="Right Leg">
     </div>
   </div>
 
-  <!-- SANG-GANG CRITERIA -->
+  <!-- CONTACTS & CASES -->
   <div class="card">
-    <div class="title">SANG-GANG CLASSIFICATION CRITERIA</div>
-    <label>Minimum one (1) criteria required:</label>
-    <div id="criteria-one"></div>
-    <label style="margin-top:12px;">Minimum two (2) criteria required:</label>
-    <div id="criteria-two"></div>
-  </div>
-
-  <!-- KNOWN CONTACTS & ASSETS -->
-  <div class="card">
-    <div class="title">KNOWN CONTACTS & ASSETS</div>
-    <label>Known Properties (one per line)</label><textarea id="props"></textarea>
-    <label>Known Phone Numbers (one per line)</label><textarea id="phones"></textarea>
-    <label>Known Associates (one per line)</label><textarea id="associates"></textarea>
-  </div>
-
-  <!-- RELATED CASES -->
-  <div class="card">
-    <div class="title">RELATED CASES / INCIDENT REPORTS</div>
-    <label>Related Cases / IRs (one per line)</label><textarea id="cases"></textarea>
+    <label>Known Properties</label>
+    <textarea id="props"></textarea>
+    <label>Known Phone Numbers</label>
+    <textarea id="phones"></textarea>
+    <label>Known Associates</label>
+    <textarea id="associates"></textarea>
+    <label>Related Cases / IRs</label>
+    <textarea id="cases"></textarea>
   </div>
 
   <!-- ACTIONS -->
   <div class="card">
     <div class="btns">
       <button id="btnGen">Generate</button>
-      <button id="btnCopy">Copy to Clipboard</button>
-      <button id="btnReset">Reset All</button>
+      <button id="btnCopy">Copy</button>
+      <button id="btnReset">Reset</button>
     </div>
   </div>
 
@@ -166,147 +178,153 @@
 </div>
 
 <script>
-const CRITERIA = [
-  {id:'A', label:'A. Person has been ruled to be a gang member by a court', group:'one'},
-  {id:'B', label:'B. Person is marked in any permanent way with gang affiliated markings (e.g. tattoos, branding, scarring)', group:'one'},
-  {id:'C', label:'C. Person has admitted to being a gang member (self-proclamation)', group:'one'},
-  {id:'D', label:'D. Person has been arrested with known gang members for offenses consistent with gang activity', group:'two'},
-  {id:'E', label:'E. Person has been identified as a gang member by a reliable confidential informant/source registered by the law enforcement agency', group:'two'},
-  {id:'F', label:'F. Person has been documented associating with recorded gang members', group:'two'},
-  {id:'G', label:'G. Person has been documented displaying gang symbols and/or hand signs', group:'two'},
-  {id:'H', label:'H. Person has been documented by law enforcement frequenting gang areas', group:'two'},
-];
-
-function initCriteria(){
-  const groupOne = document.getElementById('criteria-one');
-  const groupTwo = document.getElementById('criteria-two');
-  CRITERIA.forEach(c=>{
-    const div = document.createElement('div');
-    div.classList.add('crit-row');
-    div.innerHTML = `<input type="checkbox" id="crit${c.id}">
-      <label for="crit${c.id}" class="inline-help">${c.label}</label>
-      <input type="text" id="input${c.id}" class="spoiler-input" placeholder="Details / Reference / FIC / IR for criterion ${c.id}">`;
-    if(c.group==='one') groupOne.appendChild(div);
-    else groupTwo.appendChild(div);
-    // Toggle detail input display
-    const cb = div.querySelector('input[type="checkbox"]');
-    const txt = div.querySelector('input[type="text"]');
-    cb.addEventListener('change', e=>{txt.style.display = e.target.checked?'block':'none'; generate();});
-    txt.addEventListener('input', generate);
-  });
-}
-
-// Helper for lists
 function toList(text){
   let items = text.split(/\r?\n/).map(s=>s.trim()).filter(s=>s.length>0);
-  while(items.length<3) items.push('');
-  return items.map(s=>`[*] ${s}`).join('\n');
+  while(items.length<3) items.push("");
+  return items.map(s=>"[*] "+s).join("\n");
 }
 
-// Main generate function
 function generate(){
-  const name = document.getElementById('name').value||'John Doe';
-  const race = document.getElementById('race').value||'White';
-  const age = document.getElementById('age').value||'30';
-  const sex = document.getElementById('sex').value || '[b]M[/b]';
-  const affiliation = document.getElementById('affiliation').value||'Gang';
-  const status = document.getElementById('status').value;
-  const imgUrl = document.getElementById('imgUrl').value||'https://i.imgur.com/RvO2yL5.png?1';
-  const mdc = document.getElementById('mdc').value||'#';
-  const san = document.getElementById('san').value||'#';
+  const name=document.getElementById('name').value||"";
+  const race=document.getElementById('race').value||"";
+  const sex=document.getElementById('sex').value||"M / F";
+  const age=document.getElementById('age').value||"";
+  const affiliation=document.getElementById('affiliation').value||"";
+  const status=document.getElementById('status').value;
+  const imgUrl=document.getElementById('imgUrl').value||"https://i.imgur.com/RvO2yL5.png?1";
+  const mdc=document.getElementById('mdc').value||"MDCLINKHERE";
+  const san=document.getElementById('san').value||"SANFILELINKHERE";
+  const threat=document.getElementById('threat').value;
+  const threatDesc=document.getElementById('threatDesc').value||"Provide a detailed explanation of the threat level assigned to this POI. Include behavioral patterns, known criminal history, affiliations, previous incidents, and risk to officers or public safety.";
+  const height=document.getElementById('height').value||"";
+  const weight=document.getElementById('weight').value||"";
+  const hairEyes=document.getElementById('hairEyes').value||"";
+  const tatHead=document.getElementById('tatHead').value||"";
+  const tatChest=document.getElementById('tatChest').value||"";
+  const tatBack=document.getElementById('tatBack').value||"";
+  const tatLeftArm=document.getElementById('tatLeftArm').value||"";
+  const tatRightArm=document.getElementById('tatRightArm').value||"";
+  const tatLeftLeg=document.getElementById('tatLeftLeg').value||"";
+  const tatRightLeg=document.getElementById('tatRightLeg').value||"";
+  const props=toList(document.getElementById('props').value);
+  const phones=toList(document.getElementById('phones').value);
+  const associates=toList(document.getElementById('associates').value);
+  const cases=toList(document.getElementById('cases').value);
 
-  const threat = document.getElementById('threat').value;
-  const threatDesc = document.getElementById('threatDesc').value;
+  const bbcode=`[divbox2=white]
 
-  const height = document.getElementById('height').value||'6\'0"';
-  const weight = document.getElementById('weight').value||'180 lbs';
-  const hairEyes = document.getElementById('hairEyes').value||'Brown / Brown';
+[aligntable=right,0,0,15,0,0,transparent]
+LOS SANTOS POLICE DEPT.
+DETECTIVE BUREAU
+MISSION ROW POLICE STATION
+SINNER STREET 1
+LOS SANTOS
+[/aligntable]
+[aligntable=left,0,15,0,0,0,transparent]
+[bwlspdlogo=130][/bwlspdlogo]
+[/aligntable]
 
-  const tatHead = document.getElementById('tatHead').value;
-  const tatChest = document.getElementById('tatChest').value;
-  const tatBack = document.getElementById('tatBack').value;
-  const tatLeftArm = document.getElementById('tatLeftArm').value;
-  const tatRightArm = document.getElementById('tatRightArm').value;
-  const tatLeftLeg = document.getElementById('tatLeftLeg').value;
-  const tatRightLeg = document.getElementById('tatRightLeg').value;
+[color=transparent]tt[/color]
+[hr][/hr]
 
-  const props = toList(document.getElementById('props').value);
-  const phones = toList(document.getElementById('phones').value);
-  const associates = toList(document.getElementById('associates').value);
-  const cases = toList(document.getElementById('cases').value);
-
-  let criteriaText = CRITERIA.map(c=>{
-    const cb = document.getElementById('crit'+c.id);
-    const detail = document.getElementById('input'+c.id).value;
-    return cb.checked?`[b]${c.id}[/b] ${c.label}${detail?` – ${detail}`:''}`:'';
-  }).filter(s=>s).join('\n');
-
-  const output = `[divbox2=white][aligntable=right,0,0,15,0,0,transparent][img]${imgUrl}[/img][/aligntable]
-[b]NAME:[/b] ${name}
-[b]RACE:[/b] ${race}
-[b]AGE:[/b] ${age}
+[divbox=#083a6b][b][color=#FFFFFF]PERSONAL INFORMATION[/color][/b][/divbox]
+[divbox=white]
+[aligntable=left,0,0,10,0,0,0]
+[img width=150 height=150]${imgUrl}[/img]
+[/aligntable]
+[aligntable=left,0,10,0,0,0,0]
+[b]NAME:[/b]  ${name}
+[b]RACE:[/b]  ${race}
 [b]SEX:[/b] ${sex}
-[b]STATUS:[/b] ${status}
-[b]AFFILIATION:[/b] ${affiliation}
-[b]MDC LINK:[/b] ${mdc}
-[b]SAN-GANG LINK:[/b] ${san}
+[b]AGE:[/b]  ${age}
+[b]Affiliation:[/b]  ${affiliation}
+[b]Status:[/b] [b][color=#00BF00]ALIVE[/color][/b] / [b][color=#FF0000]DECEASED[/color][/b] / [b]UNKNOWN[/b]
+[url=${mdc}]MDC Record[/url] | [url=${san}]SAN-GANG File[/url]
+[/aligntable]
+[/divbox]
 
-[b]THREAT LEVEL:[/b] ${threat}
+[hr][/hr]
+
+[divbox=#083a6b][b][color=#FFFFFF]THREAT ANALYSIS[/color][/b][/divbox]
+[divbox=white]
+[b]Threat Level:[/b] [b][color=#1E90FF]LOW[/color][/b] / [b][color=#FFA500]MEDIUM[/color][/b] / [b][color=#FF0000]HIGH[/color][/b]
+
 ${threatDesc}
+[/divbox]
 
-[b]PHYSICAL DESCRIPTION[/b]
-Height: ${height}
-Weight: ${weight}
-Hair / Eyes: ${hairEyes}
+[hr][/hr]
 
-[b]TATTOOS[/b]
-Head: ${tatHead}
-Chest: ${tatChest}
-Back: ${tatBack}
-Left Arm: ${tatLeftArm}
-Right Arm: ${tatRightArm}
-Left Leg: ${tatLeftLeg}
-Right Leg: ${tatRightLeg}
+[divbox=#083a6b][b][color=#FFFFFF]PHYSICAL DESCRIPTION[/color][/b][/divbox]
+[divbox=white]
+[b]Height:[/b]  ${height}
+[b]Weight:[/b]  ${weight}
+[b]Hair / Eyes:[/b]  ${hairEyes}
+[b]Tattoos:[/b]
+[list]
+[*] Head: ${tatHead}
+[*] Chest: ${tatChest}
+[*] Back: ${tatBack}
+[*] Left Arm: ${tatLeftArm}
+[*] Right Arm: ${tatRightArm}
+[*] Left Leg: ${tatLeftLeg}
+[*] Right Leg: ${tatRightLeg}
+[/list]
+[/divbox]
 
-[b]SANG-GANG CRITERIA[/b]
-${criteriaText}
+[hr][/hr]
 
-[b]KNOWN PROPERTIES[/b]
+[divbox=#083a6b][b][color=#FFFFFF]KNOWN CONTACTS & ASSETS[/color][/b][/divbox]
+[divbox=white]
+[b]Known Properties:[/b]
+[list]
 ${props}
+[/list]
 
-[b]KNOWN PHONE NUMBERS[/b]
+[b]Known Phone Numbers:[/b]
+[list]
 ${phones}
+[/list]
 
-[b]KNOWN ASSOCIATES[/b]
+[b]Known Associates:[/b]
+[list]
 ${associates}
+[/list]
+[/divbox]
 
-[b]RELATED CASES / IRs[/b]
+[hr][/hr]
+
+[divbox=#083a6b][b][color=#FFFFFF]RELATED CASES / INCIDENT REPORTS[/color][/b][/divbox]
+[divbox=white]
+[list]
 ${cases}
+[/list]
+[/divbox]
+
+[hr][/hr]
+[center][divbox=#083a6b][color=#FFFFFF][size=85]CONFIDENTIAL - FOR DETECTIVE BUREAU USE ONLY[/size][/color][/divbox][/center]
+
 [/divbox2]`;
 
-  document.getElementById('output').value = output;
-  document.getElementById('preview').textContent = output;
+  document.getElementById('output').value=bbcode;
+  document.getElementById('preview').textContent=bbcode;
 }
 
-// Event listeners
-document.getElementById('btnGen').addEventListener('click', generate);
-document.getElementById('btnCopy').addEventListener('click', ()=>{
-  document.getElementById('output').select();
-  document.execCommand('copy');
+// Button events
+document.getElementById('btnGen').addEventListener('click',e=>{e.preventDefault(); generate();});
+document.getElementById('btnCopy').addEventListener('click',e=>{
+  e.preventDefault();
+  const out=document.getElementById('output');
+  out.select();
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(out.value).then(()=>alert("Copied!"));} else {document.execCommand('copy'); alert("Copied!");}
 });
-document.getElementById('btnReset').addEventListener('click', ()=>{
-  document.querySelectorAll('input,textarea').forEach(i=>i.value='');
-  document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
-  document.querySelectorAll('.spoiler-input').forEach(i=>i.style.display='none');
-  generate();
+document.getElementById('btnReset').addEventListener('click',e=>{
+  e.preventDefault();
+  document.querySelectorAll('input,textarea').forEach(el=>el.value='');
+  document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
+  document.getElementById('output').value='';
+  document.getElementById('preview').textContent='';
 });
-
-// Initialize criteria checkboxes
-initCriteria();
-generate();
 </script>
 
 </body>
 </html>
-
-
